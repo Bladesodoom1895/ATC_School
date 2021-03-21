@@ -48,7 +48,8 @@ def main():
         print('# 1: Purchase Item #')
         print('# 2: Show Items # ')
         print('# 3: Clear Items #')
-        print('# 4: Quit #')
+        print('# 4: Checkout #')
+        print('# 5: Quit #')
         print('#' * 10)
 
         choice = input('Enter your choice: ')
@@ -60,9 +61,7 @@ def main():
         elif choice == '3':
             cash_register.clear()
         elif choice == '4':
-            break
-        else:
-            main()
+            print(cash_register.get_total())
     #this will be used to display options to the
     #user get the option they want to do, like purchase
     #an item, clear their list of items, or finish their
