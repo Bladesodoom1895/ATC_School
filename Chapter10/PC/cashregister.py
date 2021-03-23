@@ -8,30 +8,26 @@ class CashRegister:
         #list to add items to each time a user
         #purchases an item
         self.__item_list = []
-    
+
     def purchase_item(self, item):
-        #add items the user purchases to the list
+        #add the item to the list
         self.__item_list.append(item)
 
-    def get_total(self):
-        #total cost accumulator
-        total_cost = 0
-
-        #total cost of internal list
-        for item in __item_list:
-            #get the items cost from retail and
-            #add it to the accumulator
-            total_cost += retail.item.__price
-        
-        return total_cost
-
     def show_items(self):
-        #show all items in the list each time a
-        #user adds an item and 
         return self.__item_list
 
+    def get_total(self):
+        #accumulator for cost
+        total = 0
+
+        #get a total price for all items in the list
+        for item in self.__item_list:
+            total += item.get_total()
+
+        return total
+
     def clear(self):
-        #clear the items in the list
+    #clear the list
         self.__item_list.clear()
 
 
@@ -40,30 +36,42 @@ def main():
     cash_register = CashRegister()
 
     #variable to control the loop
-    choice = 0
+    choice = '0'
+    i = 0
+    found = False
 
-    while choice < 0 and choice > 5:
-        print('#' * 10)
+    while choice != '4':
+        print('#' * 20)
         print('# Cash Register #')
+        print('#' * 20)
         print('# 1: Purchase Item #')
-        print('# 2: Show Items # ')
-        print('# 3: Clear Items #')
-        print('# 4: Checkout #')
-        print('# 5: Quit #')
-        print('#' * 10)
+        print('# 2: Clear Items #')
+        print('# 3: Checkout #')
+        print('# 4: Quit #')
+        print('#' * 20)
 
         choice = input('Enter your choice: ')
 
         if choice == '1':
-            print(retail.item_list)
+            print('Here is a list of purchasable items.')
+            for item in retail.item_list:
+                print(item.get_descr())
+            print()
+
+            item = input('Which item do you want to purchase? ')
+
+            for x in retail.item_list:
+                if item == retail.item_list[i].get_descr():
+                    cash_register.purchase_item(item)
+                    found = True
+                i += 1
+
+            print(cash_register.show_items())
+
         elif choice == '2':
-            print(cash_register.show_items)
-        elif choice == '3':
             cash_register.clear()
-        elif choice == '4':
+
+        elif choice == '3':
             print(cash_register.get_total())
-    #this will be used to display options to the
-    #user get the option they want to do, like purchase
-    #an item, clear their list of items, or finish their
-    #transaction
+
 main()
